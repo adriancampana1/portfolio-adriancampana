@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-lexend: "Lexend", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +18,31 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-lexend);
+  transition: all;
+}
+
+/* globals.css */
+@keyframes gradient {
+  0% {
+    color: #a855f7; /* Cor inicial */
+  }
+  25% {
+    color: #3b82f6; /* Segunda cor */
+  }
+  50% {
+    color: #22d3ee; /* Terceira cor */
+  }
+  75% {
+    color: #14b8a6; /* Quarta cor */
+  }
+  100% {
+    color: #a855f7; /* Cor final - volta à inicial */
+  }
+}
+
+.text-gradient {
+  animation: gradient 5s ease-in-out infinite; /* 5 segundos de duração da animação */
 }
 
 @layer utilities {

@@ -54,7 +54,7 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Weather Forecast Dashboard",
+    title: "Weather Forecast Dashboard.",
     description:
       "Real-time weather information and forecasts using external API integration.",
     technologies: ["React", "Redux", "OpenWeatherMap API"],

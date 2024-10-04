@@ -26,4 +26,3 @@ Explore a versão completa [aqui](https://seulink.com).
 - **[TypeScript](https://www.typescriptlang.org/)** - Superset do JavaScript que adiciona tipagem estática ao código.
 - **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS utilitário para estilização rápida e responsiva.
 - **[Framer Motion](https://www.framer.com/motion/)** - Biblioteca para animações e transições no React.
-

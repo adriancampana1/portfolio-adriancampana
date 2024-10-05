@@ -17,7 +17,7 @@ const services = [
 ];
 export default function WhatIDo() {
   return (
-    <section className="py-20">
+    <section className="py-36 md:mt-6">
       <h2 className="text-3xl font-bold mb-6">O que eu faço</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {services.map((service, index) => (

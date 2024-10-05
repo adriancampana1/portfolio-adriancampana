@@ -9,12 +9,17 @@ import {
   LuXCircle,
 } from "react-icons/lu";
 import placeholder from "../../assets/placeholder.svg";
+import docscanner from "../../assets/docscanner.svg";
+import taskmanager from "../../assets/taskmanager.svg";
+import microservices from "../../assets/microservices.svg";
+import pitch from "../../assets/pitch.svg";
 
 interface Project {
   id: number;
   title: string;
   description: string;
   technologies: string[];
+  category: string;
   liveUrl: string;
   githubUrl: string;
   images: string[];
@@ -23,29 +28,26 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-commerce Platform",
+    title: "DocScanner",
     description:
       "A full-featured online store with user authentication, product management, and payment integration.",
     technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+    category: "Back-end",
     liveUrl: "https://example-ecommerce.com",
     githubUrl: "https://github.com/username/ecommerce-project",
-    images: [
-      placeholder.src,
-      placeholder.src,
-      placeholder.src,
-      placeholder.src,
-    ],
+    images: [docscanner.src, placeholder.src, placeholder.src, placeholder.src],
   },
   {
     id: 2,
-    title: "Task Management App",
+    title: "Task Manager",
     description:
       "A productivity app for managing tasks, projects, and team collaboration.",
     technologies: ["Vue.js", "Firebase", "Vuex"],
+    category: "Front-end",
     liveUrl: "https://example-taskmanager.com",
     githubUrl: "https://github.com/username/task-manager",
     images: [
-      placeholder.src,
+      taskmanager.src,
       placeholder.src,
       placeholder.src,
       placeholder.src,
@@ -53,43 +55,90 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Weather Forecast Dashboard.",
+    title: "Microserviços",
     description:
       "Real-time weather information and forecasts using external API integration.",
     technologies: ["React", "Redux", "OpenWeatherMap API"],
+    category: "Front-end",
     liveUrl: "https://example-weather.com",
     githubUrl: "https://github.com/username/weather-dashboard",
     images: [
-      placeholder.src,
+      microservices.src,
       placeholder.src,
       placeholder.src,
       placeholder.src,
     ],
   },
+  {
+    id: 4,
+    title: "Pitch",
+    description:
+      "A full-featured online store with user authentication, product management, and payment integration.",
+    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+    category: "Back-end",
+    liveUrl: "https://example-ecommerce.com",
+    githubUrl: "https://github.com/username/ecommerce-project",
+    images: [pitch.src, placeholder.src, placeholder.src, placeholder.src],
+  },
 ];
+
+const categories = ["Todos", "Front-end", "Back-end"]; // Categorias disponíveis
 
 export default function ProjectsSection() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [filteredCategory, setFilteredCategory] = useState("Todos"); // Categoria atualmente selecionada
   const modalRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0); // Índice atual do carrossel
 
   const selectedProject = projects.find((p) => p.id === selectedId);
 
-  const nextImage = () => {
-    if (selectedProject) {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === selectedProject.images.length - 1 ? 0 : prevIndex + 1
-      );
-    }
+  const filteredProjects =
+    filteredCategory === "Todos"
+      ? projects
+      : projects.filter((project) => project.category === filteredCategory);
+
+  const totalProjects = filteredProjects.length;
+
+  const [visibleItems, setVisibleItems] = useState(3); // Padrão para desktop
+
+  // Atualizar o número de itens visíveis com base na largura da tela
+  useEffect(() => {
+    const updateVisibleItems = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        // Mobile
+        setVisibleItems(1);
+      } else if (width < 1024) {
+        // Tablet
+        setVisibleItems(2);
+      } else {
+        // Desktop
+        setVisibleItems(3);
+      }
+    };
+
+    updateVisibleItems();
+    window.addEventListener("resize", updateVisibleItems);
+    return () => window.removeEventListener("resize", updateVisibleItems);
+  }, []);
+
+  // Atualizar o índice máximo com base no número total de projetos e itens visíveis
+  const maxIndex = Math.max(totalProjects - visibleItems, 0);
+
+  // Funções para o carrossel
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1));
   };
 
-  const prevImage = () => {
-    if (selectedProject) {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === 0 ? selectedProject.images.length - 1 : prevIndex - 1
-      );
-    }
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1));
   };
+
+  useEffect(() => {
+    // Resetar o índice atual quando a categoria filtrada mudar
+    setCurrentIndex(0);
+  }, [filteredCategory, visibleItems]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -118,48 +167,156 @@ export default function ProjectsSection() {
     };
   }, [selectedId]);
 
+  const nextImage = () => {
+    if (selectedProject) {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === selectedProject.images.length - 1 ? 0 : prevIndex + 1
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedProject) {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === 0 ? selectedProject.images.length - 1 : prevIndex - 1
+      );
+    }
+  };
+
   return (
-    <section className="py-10">
+    <section className="py-20 md:pt-16 md:pb-36">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-white mb-12 text-center">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">
           Meus projetos
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              onClick={() => {
-                setSelectedId(project.id);
-                setCurrentImageIndex(0);
-              }}
-              className="bg-gray-800 rounded-lg overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105"
-              whileHover={{ y: -10 }}
+
+        {/* Botões de Filtro de Categoria */}
+        <div className="flex flex-wrap justify-center mb-8 gap-4">
+          {categories.map((category) => (
+            <button
+              key={category}
+              className={`px-4 py-2 rounded ${
+                filteredCategory === category
+                  ? "bg-teal-500 text-white"
+                  : "bg-gray-700 text-gray-300"
+              }`}
+              onClick={() => setFilteredCategory(category)}
             >
-              <img
-                src={project.images[0]}
-                alt={project.title}
-                className="w-full h-48 object-cover pointer-events-none"
-              />
-              <div className="p-6 pointer-events-none">
-                <h3 className="text-xl font-semibold text-white mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-gray-400 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-gray-700 text-sm text-white rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+              {category}
+            </button>
           ))}
         </div>
 
+        {/* Verificar se precisamos do carrossel */}
+        {totalProjects > visibleItems ? (
+          <div className="relative">
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-2 rounded-full z-10"
+            >
+              <LuChevronLeft className="w-6 h-6" />
+            </button>
+            <div className="overflow-hidden">
+              <motion.div
+                className="flex gap-4"
+                animate={{ x: `-${currentIndex * (100 / visibleItems)}%` }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                style={{
+                  width: `${(totalProjects * 100) / visibleItems} / 2%`,
+                }}
+              >
+                {filteredProjects.map((project) => (
+                  <motion.div
+                    key={project.id}
+                    onClick={() => {
+                      setSelectedId(project.id);
+                      setCurrentImageIndex(0);
+                    }}
+                    className="bg-gray-800 rounded-lg overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105"
+                    whileHover={{ y: -10 }}
+                    style={{
+                      flex:
+                        visibleItems === 1
+                          ? "0 0 100%"
+                          : `0 0 ${100 / visibleItems}%`,
+                      maxWidth: visibleItems === 1 ? "100%" : "auto",
+                    }}
+                  >
+                    <img
+                      src={project.images[0]}
+                      alt={project.title}
+                      className="w-full h-48 object-cover pointer-events-none"
+                    />
+                    <div className="p-6 pointer-events-none">
+                      <h3 className="text-xl font-semibold text-white mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-400 mb-4">
+                        {project.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, index) => (
+                          <span
+                            key={index}
+                            className="px-2 py-1 bg-gray-700 text-sm text-white rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-2 rounded-full z-10"
+            >
+              <LuChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+        ) : (
+          // Se não há projetos suficientes, mostrar os cards sem carrossel
+          <div className="flex flex-wrap gap-4 justify-center">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                onClick={() => {
+                  setSelectedId(project.id);
+                  setCurrentImageIndex(0);
+                }}
+                className="bg-gray-800 rounded-lg overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105"
+                whileHover={{ y: -10 }}
+                style={{ width: "300px" }}
+              >
+                <img
+                  src={project.images[0]}
+                  alt={project.title}
+                  className="w-full h-48 object-cover pointer-events-none"
+                />
+                <div className="p-6 pointer-events-none">
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 bg-gray-700 text-sm text-white rounded"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* Modal */}
         <AnimatePresence>
           {selectedId && selectedProject && (
             <motion.div

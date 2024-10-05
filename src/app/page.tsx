@@ -12,9 +12,9 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen text-white relative">
       <BackgroundAnimation />
-      <Header />
 
       <main className="container mx-auto px-6">
+        <Header />
         <MainSection />
         <About />
         <WhatIDo />

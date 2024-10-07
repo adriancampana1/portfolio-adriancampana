@@ -1,6 +1,6 @@
 # 🚀 Meu Portfólio de Desenvolvedor
 
-[![Portfolio Preview](https://img.shields.io/badge/Portfolio-Preview-blue)](https://seulink.com) [![Status](https://img.shields.io/badge/status-Completed-success)](https://seulink.com) ![React](https://img.shields.io/badge/React-v18.2.0-blue?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-v4.9.4-blue?logo=typescript) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v3.2.4-blue?logo=tailwindcss) ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-v6.2.3-blue?logo=framer)
+[![Portfolio Preview](src/assets/portfolio.svg)](https://seulink.com) [![Status](https://img.shields.io/badge/status-Completed-success)](https://seulink.com) ![React](https://img.shields.io/badge/React-v18.2.0-blue?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-v4.9.4-blue?logo=typescript) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v3.2.4-blue?logo=tailwindcss) ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-v6.2.3-blue?logo=framer)
 
 ## ✨ Sobre o Projeto
 

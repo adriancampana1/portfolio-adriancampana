@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-scroll";
 
 export default function MainSection() {
   return (
@@ -24,7 +25,14 @@ export default function MainSection() {
           whileTap={{ scale: 0.95 }}
           className="border border-white px-6 py-2 mt-4 hover:bg-white hover:text-gray-900 transition-colors"
         >
-          Ver Projetos
+          <Link
+            to="projects"
+            smooth={true}
+            duration={500}
+            className="cursor-pointer"
+          >
+            Meus projetos
+          </Link>
         </motion.button>
       </motion.div>
     </section>

@@ -8,9 +8,9 @@ Este é o meu portfólio pessoal, desenvolvido para apresentar meus projetos, ha
 
 ## 🔍 Demonstração
 
-![Portfolio Screenshot](https://user-images.githubusercontent.com/link_to_image.png)
+![Portfolio Screenshot](src/assets/portfolio.svg)
 
-Explore a versão completa [aqui](https://seulink.com).
+Explore a versão completa [aqui]([https://portfolio-adriancampana-scz4.vercel.app]).
 
 ## 🔧 Funcionalidades
 

@@ -8,86 +8,12 @@ import {
   LuChevronLeft,
   LuXCircle,
 } from "react-icons/lu";
-import placeholder from "../../assets/placeholder.svg";
-import docscanner from "../../assets/docscanner.svg";
-import taskmanager from "../../assets/taskmanager.svg";
-import microservices from "../../assets/microservices.svg";
-import pitch from "../../assets/pitch.svg";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  technologies: string[];
-  category: string;
-  liveUrl: string;
-  githubUrl: string;
-  images: string[];
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "DocScanner",
-    description:
-      "A full-featured online store with user authentication, product management, and payment integration.",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-    category: "Back-end",
-    liveUrl: "https://example-ecommerce.com",
-    githubUrl: "https://github.com/username/ecommerce-project",
-    images: [docscanner.src, placeholder.src, placeholder.src, placeholder.src],
-  },
-  {
-    id: 2,
-    title: "Task Manager",
-    description:
-      "A productivity app for managing tasks, projects, and team collaboration.",
-    technologies: ["Vue.js", "Firebase", "Vuex"],
-    category: "Front-end",
-    liveUrl: "https://example-taskmanager.com",
-    githubUrl: "https://github.com/username/task-manager",
-    images: [
-      taskmanager.src,
-      placeholder.src,
-      placeholder.src,
-      placeholder.src,
-    ],
-  },
-  {
-    id: 3,
-    title: "Microserviços",
-    description:
-      "Real-time weather information and forecasts using external API integration.",
-    technologies: ["React", "Redux", "OpenWeatherMap API"],
-    category: "Front-end",
-    liveUrl: "https://example-weather.com",
-    githubUrl: "https://github.com/username/weather-dashboard",
-    images: [
-      microservices.src,
-      placeholder.src,
-      placeholder.src,
-      placeholder.src,
-    ],
-  },
-  {
-    id: 4,
-    title: "Pitch",
-    description:
-      "A full-featured online store with user authentication, product management, and payment integration.",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-    category: "Back-end",
-    liveUrl: "https://example-ecommerce.com",
-    githubUrl: "https://github.com/username/ecommerce-project",
-    images: [pitch.src, placeholder.src, placeholder.src, placeholder.src],
-  },
-];
-
-const categories = ["Todos", "Front-end", "Back-end"]; // Categorias disponíveis
+import { projects, categories } from "./projectData";
 
 export default function ProjectsSection() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [filteredCategory, setFilteredCategory] = useState("Todos"); // Categoria atualmente selecionada
+  const [filteredCategory, setFilteredCategory] = useState("Todos");
   const modalRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0); // Índice atual do carrossel
 
@@ -183,8 +109,22 @@ export default function ProjectsSection() {
     }
   };
 
+  // Desabilitar scroll no body quando o modal estiver ativo
+  useEffect(() => {
+    if (selectedId !== null) {
+      document.body.style.overflow = "hidden"; // Desativa scroll
+    } else {
+      document.body.style.overflow = ""; // Reativa scroll
+    }
+
+    return () => {
+      // Garante que o estilo seja restaurado quando o componente desmontar
+      document.body.style.overflow = "";
+    };
+  }, [selectedId]);
+
   return (
-    <section className="py-20 md:pt-16 md:pb-36">
+    <section id="projects">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">
           Meus projetos
@@ -242,17 +182,28 @@ export default function ProjectsSection() {
                       maxWidth: visibleItems === 1 ? "100%" : "auto",
                     }}
                   >
-                    <img
-                      src={project.images[0]}
-                      alt={project.title}
-                      className="w-full h-48 object-cover pointer-events-none"
-                    />
+                    {/* Atualizar para usar <picture> */}
+                    <picture>
+                      <source
+                        media="(max-width: 640px)"
+                        srcSet={project.images[0].mobile}
+                      />
+                      <source
+                        media="(min-width: 641px)"
+                        srcSet={project.images[0].desktop}
+                      />
+                      <img
+                        src={project.images[0].desktop}
+                        alt={project.title}
+                        className="w-full h-48 object-cover pointer-events-none"
+                      />
+                    </picture>
                     <div className="p-6 pointer-events-none">
                       <h3 className="text-xl font-semibold text-white mb-2">
                         {project.title}
                       </h3>
                       <p className="text-gray-400 mb-4">
-                        {project.description}
+                        {project.shortDescription}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech, index) => (
@@ -290,16 +241,28 @@ export default function ProjectsSection() {
                 whileHover={{ y: -10 }}
                 style={{ width: "300px" }}
               >
-                <img
-                  src={project.images[0]}
-                  alt={project.title}
-                  className="w-full h-48 object-cover pointer-events-none"
-                />
+                <picture>
+                  <source
+                    media="(max-width: 640px)"
+                    srcSet={project.images[0].mobile}
+                  />
+                  <source
+                    media="(min-width: 641px)"
+                    srcSet={project.images[0].desktop}
+                  />
+                  <img
+                    src={project.images[0].desktop}
+                    alt={project.title}
+                    className="w-full h-48 object-cover pointer-events-none"
+                  />
+                </picture>
                 <div className="p-6 pointer-events-none">
                   <h3 className="text-xl font-semibold text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <p className="text-gray-400 mb-4">
+                    {project.shortDescription}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, index) => (
                       <span
@@ -327,21 +290,33 @@ export default function ProjectsSection() {
             >
               <motion.div
                 ref={modalRef}
-                className="bg-gray-800 rounded-lg overflow-hidden max-w-4xl w-full md:max-w-3xl lg:max-w-4xl h-auto md:h-auto lg:h-auto"
+                className="bg-gray-800 rounded-lg overflow-hidden max-w-4xl w-full md:max-w-3xl lg:max-w-4xl max-h-[90vh] h-auto flex flex-col"
               >
-                <div className="relative">
-                  <motion.img
-                    key={currentImageIndex}
-                    src={selectedProject.images[currentImageIndex]}
-                    alt={`${selectedProject.title} - Image ${
-                      currentImageIndex + 1
-                    }`}
-                    className="w-full h-64 md:h-80 lg:h-96 object-cover"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                {/* Image Container */}
+                <div className="relative flex-shrink-0">
+                  <picture>
+                    <source
+                      media="(max-width: 640px)"
+                      srcSet={selectedProject.images[currentImageIndex].mobile}
+                    />
+                    <source
+                      media="(min-width: 641px)"
+                      srcSet={selectedProject.images[currentImageIndex].desktop}
+                    />
+                    <motion.img
+                      key={currentImageIndex}
+                      src={selectedProject.images[currentImageIndex].desktop}
+                      alt={`${selectedProject.title} - Image ${
+                        currentImageIndex + 1
+                      }`}
+                      className="w-full h-80 md:h-80 lg:h-96 object-cover"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </picture>
+                  {/* Close Button and Navigation Buttons */}
                   <button
                     onClick={() => setSelectedId(null)}
                     className="absolute top-2 right-2 md:top-4 md:right-4 text-white bg-gray-900 rounded-full p-2"
@@ -361,12 +336,14 @@ export default function ProjectsSection() {
                     <LuChevronRight className="w-6 h-6 md:w-8 md:h-8" />
                   </button>
                 </div>
-                <div className="p-4 md:p-6">
+
+                {/* Content Area */}
+                <div className="p-4 md:p-6 overflow-y-auto flex-grow scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-700">
                   <h3 className="text-2xl font-semibold text-white mb-2 md:mb-4">
                     {selectedProject.title}
                   </h3>
                   <p className="text-gray-400 mb-4 md:mb-6">
-                    {selectedProject.description}
+                    {selectedProject.longDescription}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4 md:mb-6">
                     {selectedProject.technologies.map((tech, index) => (
@@ -400,21 +377,30 @@ export default function ProjectsSection() {
                   </div>
                   <div className="flex items-center gap-2 overflow-x-auto pb-2">
                     {selectedProject.images.map((image, index) => (
-                      <motion.img
-                        key={index}
-                        src={image}
-                        alt={`${selectedProject.title} - Thumbnail ${
-                          index + 1
-                        }`}
-                        className={`w-16 h-16 object-cover rounded cursor-pointer ${
-                          index === currentImageIndex
-                            ? "ring-2 ring-teal-500"
-                            : ""
-                        }`}
-                        onClick={() => setCurrentImageIndex(index)}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      />
+                      <picture key={index}>
+                        <source
+                          media="(max-width: 640px)"
+                          srcSet={image.mobile}
+                        />
+                        <source
+                          media="(min-width: 641px)"
+                          srcSet={image.desktop}
+                        />
+                        <motion.img
+                          src={image.desktop}
+                          alt={`${selectedProject.title} - Thumbnail ${
+                            index + 1
+                          }`}
+                          className={`w-16 h-16 object-cover rounded cursor-pointer ${
+                            index === currentImageIndex
+                              ? "ring-2 ring-teal-500"
+                              : ""
+                          }`}
+                          onClick={() => setCurrentImageIndex(index)}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        />
+                      </picture>
                     ))}
                   </div>
                 </div>

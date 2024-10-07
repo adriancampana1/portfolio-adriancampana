@@ -16,10 +16,12 @@ export default function Portfolio() {
       <main className="container mx-auto px-6">
         <Header />
         <MainSection />
-        <About />
-        <WhatIDo />
-        <Projects />
-        <SocialMedia />
+        <div className="flex flex-col gap-20 md:gap-36">
+          <About />
+          <WhatIDo />
+          <Projects />
+          <SocialMedia />
+        </div>
       </main>
       <Footer />
     </div>

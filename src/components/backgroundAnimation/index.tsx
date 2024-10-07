@@ -27,7 +27,7 @@ export default function BackgroundAnimation() {
           value: "#111827",
         },
       },
-      fpsLimit: 120,
+      fpsLimit: 60,
       interactivity: {
         events: {
           onClick: {
@@ -44,14 +44,14 @@ export default function BackgroundAnimation() {
             quantity: 1,
           },
           repulse: {
-            distance: 200,
+            distance: 150,
             duration: 0.4,
           },
         },
       },
       particles: {
         color: {
-          value: "#374151",
+          value: "#3e4b5f",
         },
         links: {
           color: "#9ca3af",
@@ -67,17 +67,17 @@ export default function BackgroundAnimation() {
             default: OutMode.out,
           },
           random: false,
-          speed: 2,
+          speed: 1.5,
           straight: false,
         },
         number: {
           density: {
             enable: true,
           },
-          value: 80,
+          value: 50,
         },
         opacity: {
-          value: 0.4,
+          value: 0.7,
         },
         shape: {
           type: "circle",
@@ -96,7 +96,7 @@ export default function BackgroundAnimation() {
       id="tsparticles"
       particlesLoaded={particlesLoaded}
       options={options}
-      className="absolute top-0 left-0 w-full h-full -z-10"
+      className="absolute top-0 left-0 w-full h-full -z-10 bg-gray-900"
     />
   );
 }

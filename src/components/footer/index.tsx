@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuGithub, LuLinkedin, LuMail, LuChevronUp } from "react-icons/lu";
+import { Link } from "react-scroll";
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -52,24 +53,54 @@ export default function Footer() {
             <h4 className="text-xl font-semibold mb-4">Links Rápidos</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-teal-400 transition-colors">
+                <Link
+                  to="home"
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer hover:text-teal-400 transition-colors"
+                >
                   Início
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-teal-400 transition-colors">
-                  Projetos
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-teal-400 transition-colors">
+                <Link
+                  to="about"
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer hover:text-teal-400 transition-colors"
+                >
                   Sobre
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-teal-400 transition-colors">
+                <Link
+                  to="whatido"
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer hover:text-teal-400 transition-colors"
+                >
+                  O que eu faço
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="projects"
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer hover:text-teal-400 transition-colors"
+                >
+                  Meus projetos
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="contact"
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer hover:text-teal-400 transition-colors"
+                >
                   Contato
-                </a>
+                </Link>
               </li>
             </ul>
           </motion.div>

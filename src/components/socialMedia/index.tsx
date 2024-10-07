@@ -1,14 +1,33 @@
 import { FiGithub, FiLinkedin, FiInstagram, FiMail } from "react-icons/fi";
 
 const socialLinks = [
-  { icon: <FiLinkedin />, label: "Linkedin", href: "#" },
-  { icon: <FiInstagram />, label: "Instagram", href: "#" },
-  { icon: <FiGithub />, label: "GitHub", href: "#" },
-  { icon: <FiMail />, label: "E-mail", href: "#" },
+  {
+    icon: <FiLinkedin />,
+    label: "Linkedin",
+    href: "https://www.linkedin.com/in/adrian-campana/",
+  },
+  {
+    icon: <FiInstagram />,
+    label: "Instagram",
+    href: "https://www.instagram.com/adrian.campana/",
+  },
+  {
+    icon: <FiGithub />,
+    label: "GitHub",
+    href: "https://github.com/adriancampana1",
+  },
+  {
+    icon: <FiMail />,
+    label: "E-mail",
+    href: "mailto:adrianphcampana12@gmail.com",
+  },
 ];
 export default function SocialMedia() {
   return (
-    <section className="py-20 flex flex-col justify-center items-center">
+    <section
+      id="contact"
+      className="flex flex-col justify-center items-center mb-6"
+    >
       <h2 className="text-3xl font-bold mb-6">Contato</h2>
       <p className="mb-6">
         Gostou do meu trabalho? Entre em contato ou acompanhe as minhas redes
@@ -19,6 +38,7 @@ export default function SocialMedia() {
           <a
             key={index}
             href={link.href}
+            target="_blank"
             className="flex items-center justify-center gap-2 bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors"
           >
             {link.icon}

@@ -10,7 +10,7 @@ Este é o meu portfólio pessoal, desenvolvido para apresentar meus projetos, ha
 
 ![Portfolio Screenshot](src/assets/portfolio.svg)
 
-Explore a versão completa [aqui]([https://seulink.com](https://portfolio-adriancampana-scz4.vercel.app)).
+Explore a versão completa [aqui]([https://portfolio-adriancampana-scz4.vercel.app]).
 
 ## 🔧 Funcionalidades
 

@@ -356,25 +356,31 @@ export default function ProjectsSection() {
                     ))}
                   </div>
                   <div className="flex gap-4 mb-4 md:mb-6">
-                    <a
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition-colors"
-                    >
-                      <LuExternalLink className="w-4 h-4" />
-                      Ver Projeto
-                    </a>
-                    <a
-                      href={selectedProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
-                    >
-                      <LuGithub className="w-4 h-4" />
-                      Código Fonte
-                    </a>
+                    {selectedProject.liveUrl && (
+                      <a
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition-colors"
+                      >
+                        <LuExternalLink className="w-4 h-4" />
+                        Ver Projeto
+                      </a>
+                    )}
+
+                    {selectedProject.githubUrl && (
+                      <a
+                        href={selectedProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+                      >
+                        <LuGithub className="w-4 h-4" />
+                        Código Fonte
+                      </a>
+                    )}
                   </div>
+
                   <div className="flex items-center gap-2 overflow-x-auto pb-2">
                     {selectedProject.images.map((image, index) => (
                       <picture key={index}>

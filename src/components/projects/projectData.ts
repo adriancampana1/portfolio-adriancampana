@@ -59,8 +59,8 @@ export const projects: Project[] = [
       "Solução de digitalização com IA que automatiza a organização de documentos, renomeando e salvando arquivos com base nos campos configurados. Ideal para otimizar a gestão documental e aumentar a produtividade.",
     technologies: ["React Native", "Typescript", "Tailwind", "AsyncStorage"],
     category: "Front-end",
-    liveUrl: "https://example-docscanner.com",
-    githubUrl: "https://github.com/username/docscanner",
+    liveUrl: "",
+    githubUrl: "",
     images: [
       {
         desktop: docscannerpage1desktop.src,
@@ -93,8 +93,8 @@ export const projects: Project[] = [
       "Gerenciador de tarefas offline com integração à agenda local e lembretes automáticos. Simplifica a organização diária e ajuda a aumentar a produtividade, sem depender de conexão com a internet.",
     technologies: ["React Native", "AsyncStorage", "Typescript", "Agenda"],
     category: "Front-end",
-    liveUrl: "https://example-taskmanager.com",
-    githubUrl: "https://github.com/username/task-manager",
+    liveUrl: "",
+    githubUrl: "https://github.com/adriancampana1/task-manager-app.git",
     images: [
       {
         desktop: taskmanager1desktop.src,
@@ -133,8 +133,8 @@ export const projects: Project[] = [
       "Spring Security",
     ],
     category: "Back-end",
-    liveUrl: "https://example-microservices.com",
-    githubUrl: "https://github.com/username/microservices",
+    liveUrl: "",
+    githubUrl: "",
     images: [
       {
         desktop: microservicesdesktop.src,
@@ -151,8 +151,8 @@ export const projects: Project[] = [
       "Aplicativo para vendedores organizarem suas vendas e clientes. Suporte de IA para acompanhar resultados e identificar oportunidades, ajudando a otimizar estratégias e impulsionar as vendas.",
     technologies: ["React Native", "Redux", "Styled-Components", "Typescript"],
     category: "Front-end",
-    liveUrl: "https://example-pitchapp.com",
-    githubUrl: "https://github.com/username/pitch",
+    liveUrl: "",
+    githubUrl: "",
     images: [
       {
         desktop: pitch1desktop.src,

@@ -136,6 +136,7 @@ export default function Footer() {
                 href="mailto:adrianphcampana12@gmail.com"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                target="_blank"
                 className="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition-colors"
               >
                 <LuMail className="w-6 h-6" />

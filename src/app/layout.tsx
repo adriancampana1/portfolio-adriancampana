@@ -9,7 +9,7 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "Adrian Campana",
+  title: "Portfolio Adrian Campana",
   description: "Adrian Campana - Desenvolvedor full-stack",
 };
 
